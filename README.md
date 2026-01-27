@@ -7,7 +7,7 @@
 
 **Steel Power Load Simulation System** is a multi-layer hybrid simulation platform designed to simulate and analyze power load characteristics during the steel production process.
 
-This project innovatively adopts a three-layer architecture consisting of **LLM (Large Language Model) + AnyLogic (Discrete Event Simulation) + MATLAB FMU (Physical Mechanism Model)**. It achieves end-to-end generation from vague operational descriptions to precise, second-level power load waveforms.
+This project innovatively adopts a three-layer architecture consisting of **LLM (Large Language Model) + AnyLogic (Discrete Event Simulation) + MATLAB FMU (Physical Mechanism Model)**. It achieves end-to-end generation from vague operational descriptions to precise power load waveforms.
 
 ## 📖 Introduction
 
