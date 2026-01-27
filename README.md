@@ -14,7 +14,9 @@ This project innovatively adopts a three-layer architecture consisting of **LLM 
 The steel industry is a major consumer of electricity, characterized by loads with strong impacts, large fluctuations, and non-linearity. This system aims to assist:
 
 🏭 **Factories**: Optimize production schedules, reduce demand charges, and perform virtual commissioning.
+
 ⚡ **Power Grids**: Analyze power quality and evaluate microgrid stability.
+
 🔬 **Research**: Provide high-quality synthetic data for load prediction algorithms.
 
 ### Core Advantages
@@ -44,10 +46,13 @@ This system uses Python as the data flow layer, connecting the LLM, AnyLogic, an
 **LLM-Driven Parameter Generation**:
     *   Automatically generates reasonable parameters such as smelting duration, transformer tap positions, and carbon/oxygen injection rates.
     *   Supports scenario switching like "different furnace types," "scrap varieties," and "full-load modes."
+    
 **FMU Modular Co-simulation**:
     *   Supports the FMI 2.0 standard, integrating electrical models compiled by MATLAB/Simulink.
+    
 **Full-Process Coverage**:
     *   Covers the entire process: Electric Arc Furnace (EAF) -> Ladle Furnace (LF) -> Continuous Casting (CC) -> Rolling Mill.
+    
 **Data Standardization**:
     *   Python scripts automatically clean raw output data to generate standard CSV data files ranging from second-level to hour-level resolution based on production schedules.
 
