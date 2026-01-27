@@ -13,9 +13,9 @@ This project innovatively adopts a three-layer architecture consisting of **LLM 
 
 The steel industry is a major consumer of electricity, characterized by loads with strong impacts, large fluctuations, and non-linearity. This system aims to assist:
 
-*   🏭 **Factories**: Optimize production schedules, reduce demand charges, and perform virtual commissioning.
-*   ⚡ **Power Grids**: Analyze power quality and evaluate microgrid stability.
-*   🔬 **Research**: Provide high-quality synthetic data for load prediction algorithms.
+🏭 **Factories**: Optimize production schedules, reduce demand charges, and perform virtual commissioning.
+⚡ **Power Grids**: Analyze power quality and evaluate microgrid stability.
+🔬 **Research**: Provide high-quality synthetic data for load prediction algorithms.
 
 ### Core Advantages
 1.  **Intelligent Configuration**: Utilizes an LLM with a built-in metallurgical expert knowledge base to automatically convert natural language descriptions into professional simulation parameters.
@@ -38,39 +38,17 @@ This system uses Python as the data flow layer, connecting the LLM, AnyLogic, an
     *   Individual energy-consuming devices (EAF, LF, CC) are encapsulated as FMU modules.
     *   Called by AnyLogic to input state variables and output real-time power, voltage, and current.
 
-```mermaid
-graph TD        
-    subgraph Python Layer [Python Control Layer & LLM]
-        User[User Input: Scenario/Steel Grade] --> LLM[LLM (Metallurgical Expert Knowledge)]
-        LLM --> JSON1[production_schedule.json<br>Process Constraints]
-        LLM --> JSON2[device_params.json<br>Physical Params]
-    end
-
-    subgraph AnyLogic Layer [AnyLogic Process Simulation Layer]
-        JSON1 --> AL_Process[Process Logic & Logistics]
-        JSON2 --> AL_Param[Parameter Initialization]
-        AL_Process -- State Trigger --> FMU_Call[FMU Call Interface]
-    end
-
-    subgraph FMU Layer [MATLAB Physical Mechanism Layer]
-        FMU_Call -- Input: Setpoints/Time --> EAF_FMU[EAF FMU]
-        FMU_Call -- Input: Temp/Speed --> LF_FMU[LF FMU]
-        EAF_FMU -- Output: P/Q/I/V --> Data[Real-time Load Data]
-    end
-
-    Data --> Python_Vis[Python Visualization & Analysis]
-```
 
 ## ✨ Key Features
 
-*   **LLM-Driven Parameter Generation**:
+**LLM-Driven Parameter Generation**:
     *   Automatically generates reasonable parameters such as smelting duration, transformer tap positions, and carbon/oxygen injection rates.
     *   Supports scenario switching like "different furnace types," "scrap varieties," and "full-load modes."
-*   **FMU Modular Co-simulation**:
+**FMU Modular Co-simulation**:
     *   Supports the FMI 2.0 standard, integrating electrical models compiled by MATLAB/Simulink.
-*   **Full-Process Coverage**:
+**Full-Process Coverage**:
     *   Covers the entire process: Electric Arc Furnace (EAF) -> Ladle Furnace (LF) -> Continuous Casting (CC) -> Rolling Mill.
-*   **Data Standardization**:
+**Data Standardization**:
     *   Python scripts automatically clean raw output data to generate standard CSV data files ranging from second-level to hour-level resolution based on production schedules.
 
 ## 📂 Directory Structure
@@ -147,19 +125,11 @@ Calculated by the FMU mechanism model, including high-order harmonics and non-li
 
 ## 🗓️ Roadmap
 
-- [x] **v0.1**: Completed MATLAB Simulink models for EAF and LF and exported them as FMUs.
-- [x] **v0.2**: Built the AnyLogic basic logistics framework and implemented static FMU calls.
+- [√] **v0.1**: Completed MATLAB Simulink models for EAF and LF and exported them as FMUs.
+- [√] **v0.2**: Built the AnyLogic basic logistics framework and implemented static FMU calls.
 - [ ] **v0.3**: Integrate the LLM module to enable text-to-config parameter generation.
 - [ ] **v0.4**: Introduce Reinforcement Learning (RL) agents into AnyLogic to optimize scheduling strategies.
 
-## 🤝 Contributing
-
-Contributions are welcome! We are especially looking for developers with a background in **Metallurgy** or experience in **AnyLogic/Simulink Simulation**.
-
-1.  Fork this repository
-2.  Create a Feat_xxx branch
-3.  Commit your code
-4.  Create a Pull Request
 
 ## 📜 License
 
