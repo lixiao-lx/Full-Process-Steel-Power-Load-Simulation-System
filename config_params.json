@@ -1,0 +1,34 @@
+{
+    "metadata": {
+        "description": "EAF Model System Configuration & Initialization"
+    },
+    "fixed_parameters": {
+        "electrical": {
+            "R_sys": 0.0003,
+            "X_sys": 0.003,
+            "Tap_Lookup_V": [400, 500, 600, 700, 800]
+        },
+        "geometry": {
+            "R_fur": 3.0,
+            "R_ele": 0.3,
+            "A_furnace": 28.2743
+        },
+        "materials": {
+            "rho_solid": 1200
+        },
+        "environment": {
+            "T_amb": 298.15,
+            "T_out_steel_target": 1923.15
+        }
+    },
+    "initial_states": {
+        "mass": {
+            "m_solid_0": 100000,
+            "m_liq_0": 5000
+        },
+        "temperature": {
+            "T_solid_0": 298.15,
+            "T_liq_0": 1823.15
+        }
+    }
+}

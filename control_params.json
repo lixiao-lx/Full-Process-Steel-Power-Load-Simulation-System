@@ -1,0 +1,35 @@
+{
+    "metadata": {
+        "description": "EAF Operation Stage Control Profile"
+    },
+    "control_stages": {
+        "Stage1_Boredown": {
+            "description": "Boredown",
+            "k_tap_1": 3,
+            "Z_set_1": 3.5,
+            "mass_flow_O2_1": 0.0,
+            "mass_flow_CO2_1": 0.0
+        },
+        "Stage2_Melting": {
+            "description": "Melting",
+            "k_tap_2": 5,
+            "Z_set_2": 3.0,
+            "mass_flow_O2_2": 0.2,
+            "mass_flow_CO2_2": 0.0
+        },
+        "Stage3_Foaming": {
+            "description": "Foaming",
+            "k_tap_3": 5,
+            "Z_set_3": 3.5,
+            "mass_flow_O2_3": 1.0,
+            "mass_flow_CO2_3": 0.8
+        },
+        "Stage4_Refining": {
+            "description": "Refining",
+            "k_tap_4": 2,
+            "Z_set_4": 1.5,
+            "mass_flow_O2_4": 0.0,
+            "mass_flow_CO2_4": 0.0
+        }
+    }
+}
