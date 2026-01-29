@@ -30,15 +30,15 @@ This system uses Python as the data flow layer, connecting the LLM, AnyLogic, an
 
 ### Three-Layer Architecture Details
 1.  **LLM Parameter Configuration Layer**:
-    **   Contains built-in metallurgical expert knowledge base Prompts.
-    **   Parses user requirements (e.g., "Produce a heat of high-strength steel using 100t of sheared scrap..."), generating two standard JSON configuration files: `control_params.json` (Control Profile) and `config_params.json` (System Configuration Profile).
+*   Contains built-in metallurgical expert knowledge base Prompts.
+*   Parses user requirements (e.g., "Produce a heat of high-strength steel using 100t of sheared scrap..."), generating two standard JSON configuration files: `control_params.json` (Control Profile) and `config_params.json` (System Configuration Profile).
 2.  **AnyLogic Process Simulation Layer**:
-    **   Acts as the main simulation engine, reading JSON files to set constraints.
-    **   Simulates discrete events such as crane scheduling, ladle turnover, and process waiting times.
-    **   Responsible for triggering the start and end of each process.
+*   Acts as the main simulation engine, reading JSON files to set constraints.
+*   Simulates discrete events such as crane scheduling, ladle turnover, and process waiting times.
+*   Responsible for triggering the start and end of each process.
 3.  **MATLAB/Simulink Physical Mechanism Layer**:
-    **   Individual energy-consuming devices (EAF, LF, CC) are encapsulated as FMU modules.
-    **   Called by AnyLogic to input state variables and output real-time power, voltage, and current.
+*   Individual energy-consuming devices (EAF, LF, CC) are encapsulated as FMU modules.
+*   Called by AnyLogic to input state variables and output real-time power, voltage, and current.
 
 
 ## ✨ Key Features
