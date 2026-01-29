@@ -1,1 +1,7 @@
-requirements.txt
+fmpy>=0.3.5
+numpy>=1.21.0
+json
+shutil/os
+csv
+datetime
+sys/logging
