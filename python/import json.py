@@ -4,7 +4,6 @@ import fmpy
 from fmpy import read_model_description, extract
 from fmpy.fmi2 import FMU2Slave
 
-# --- 1. 读取配置 ---
 def load_json_config(control_file, config_file):
     try:
         with open(control_file, 'r', encoding='utf-8') as f:
@@ -16,7 +15,6 @@ def load_json_config(control_file, config_file):
         print(f"配置文件读取错误: {e}")
         return None, None
 
-# --- 2. 全量参数映射 ---
 def map_all_parameters(control_data, config_data):
     p_map = {}
     
@@ -71,7 +69,6 @@ def map_all_parameters(control_data, config_data):
 
     return {k: v for k, v in p_map.items() if v is not None}
 
-# --- 3. 智能查找变量 ---
 def get_vr_info(model_description, var_name):
     for variable in model_description.modelVariables:
         if variable.name == var_name:
@@ -84,7 +81,6 @@ def get_vr_info(model_description, var_name):
             
     return None
 
-# --- 4. 核心验证逻辑 ---
 def verify_all(fmu_path, json_control, json_config):
     control_data, config_data = load_json_config(json_control, json_config)
     if not control_data: return
@@ -106,7 +102,6 @@ def verify_all(fmu_path, json_control, json_config):
         fmu.setupExperiment(startTime=0.0)
         fmu.enterInitializationMode()
         
-        # --- 打印报告头 ---
         print("\n" + "="*120)
         print(f"{'全量参数验证与诊断报告':^120}")
         print("="*120)
@@ -159,7 +154,6 @@ def verify_all(fmu_path, json_control, json_config):
                 else:
                     is_match = (actual_val == expected_val)
             
-            # 状态判定
             if is_match:
                 status = "✅ 成功"
                 match_count += 1
@@ -173,7 +167,6 @@ def verify_all(fmu_path, json_control, json_config):
                 else:
                     diag_msg = "写入无效，可能被内部逻辑覆盖"
 
-            # 格式化输出
             s_expect = f"{expected_val:.5g}" if isinstance(expected_val, float) else str(expected_val)
             s_actual = f"{actual_val:.5g}" if isinstance(actual_val, float) else str(actual_val)
             
@@ -185,7 +178,6 @@ def verify_all(fmu_path, json_control, json_config):
         print(f"验证统计: 总计 {len(sorted_names)} | 成功: {match_count} | 失败/未找到: {fail_count}")
         print("="*120 + "\n")
         
-        # --- 最终建议 ---
         if fail_count > 0:
             print("【诊断建议】")
             print("1. 如果 '未找到'：请使用 inspect_fmu.py 查看真实的变量名格式 (如 . vs _)。")
@@ -207,9 +199,9 @@ def verify_all(fmu_path, json_control, json_config):
             shutil.rmtree(unzip_dir)
 
 if __name__ == "__main__":
-    # 路径配置
     FMU_FILE = r'D:\钢铁电力负荷预测\eaf_sim_v3.0\simulink_EAF\setup_EAF_text.fmu'
     JSON_CONTROL = r'D:\钢铁电力负荷预测\eaf_sim_v3.0\python\control_params.json'
     JSON_CONFIG = r'D:\钢铁电力负荷预测\eaf_sim_v3.0\python\config_params.json'
     
+
     verify_all(FMU_FILE, JSON_CONTROL, JSON_CONFIG)
