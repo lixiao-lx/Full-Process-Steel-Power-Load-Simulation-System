@@ -1462,27 +1462,21 @@ try {
 							<Value Class="CodeValue">
 								<Code><![CDATA[// --- On at exit action for delayLF block (FINAL CLEAN VERSION) ---
 
-// 1. 获取当前正在处理的钢包 (Ladle) Agent
-//    此时，agent 的 mass 和 temperature 属性值是 EAF 工序结束后的结果。
+
 Ladle currentLadle = (Ladle) agent;
 
-// 2. 定义Python解释器、LF专用脚本的路径，并构建命令
 String pythonPath = "D:/anaconda/python.exe"; 
-// **关键**: 调用为 LF 炉准备的脚本 run_lf_fmu.py
 String scriptPath = "D:/钢铁电力负荷预测/python/run_lf_fmu.py";
-// 构建将要执行的命令字符串
-// 格式: "python.exe lf_script.py <mass_kg> <temp_from_eaf> <target_temp_lf>"
 String command = "\"" + pythonPath + "\" \"" + scriptPath + "\" " + 
-                 (currentLadle.mass * 1000) + " " +  // 输入1: EAF处理后的质量 (kg)
-                 currentLadle.temperature + " " +   // 输入2: EAF处理后的温度 (°C)
-                 targetTemp_LF_C;                   // 输入3: LF工序的目标温度 (°C)
+                 (currentLadle.mass * 1000) + " " +  
+                 currentLadle.temperature + " " +   
+                 targetTemp_LF_C;                   
 
 traceln("Executing LF command for Ladle " + currentLadle.getId() + ": " + command);
 
 try {
     Process process = Runtime.getRuntime().exec(command);
 
-    // 3. 使用在 Main 中定义的、支持UTF-8编码的 StreamGobbler 异步读取输出
     StringBuilder output = new StringBuilder();
     StringBuilder errorOutput = new StringBuilder();
 
@@ -1492,14 +1486,11 @@ try {
     outputThread.start();
     errorThread.start();
 
-    // 4. 等待Python进程安全结束
     int exitCode = process.waitFor();
     outputThread.join(); 
     errorThread.join();
 
-    // 5. 根据进程返回的结果，再次更新钢包的状态
     if (exitCode == 0) { // 进程正常退出
-        // 打印从 stderr 收到的任何调试信息 (例如 "Successfully saved log...")
         if (errorOutput.length() > 0) {
             traceln("DEBUG info from Python script (LF):\n" + errorOutput.toString());
         }
@@ -1507,16 +1498,13 @@ try {
         String result = output.toString().trim();
         if (!result.isEmpty()) {
             traceln("Result received from LF_FMU: " + result);
-            
-            // 解析由 LF 脚本返回的 "温度,质量" 格式的字符串
+
             String[] values = result.split(",");
             
             if (values.length == 2) {
-                // 解析 LF 计算出的最终温度和最终质量
-                double finalTemperatureLF = Double.parseDouble(values[0]);
-                double finalMassLF = Double.parseDouble(values[1]) / 1000; // 从kg转换回吨
 
-                // 【核心】再次更新钢包的温度和质量属性，以反映LF精炼后的状态
+                double finalTemperatureLF = Double.parseDouble(values[0]);
+                double finalMassLF = Double.parseDouble(values[1]) / 1000; 
                 currentLadle.temperature = finalTemperatureLF;
                 currentLadle.mass = finalMassLF;
                 
@@ -1528,7 +1516,7 @@ try {
         } else {
             traceln("Warning: LF_FMU script finished successfully but produced no standard output.");
         }
-    } else { // 进程异常退出
+    } else { 
         traceln("ERROR: LF_FMU script exited with non-zero code: " + exitCode);
         if (errorOutput.length() > 0) {
             traceln("ERROR details from LF script:\n" + errorOutput.toString());
@@ -1629,11 +1617,9 @@ try {
 
 Ladle currentLadle = (Ladle) agent;
 
-// 1. 配置路径
 String pythonPath = "D:/anaconda/python.exe"; 
 String scriptPath = "D:/钢铁电力负荷预测/python/run_cc_fmu.py"; 
 
-// 3. 构建命令
 String command = "\"" + pythonPath + "\" \"" + scriptPath + "\" " + 
                  currentLadle.temperature + " " + 
                  (currentLadle.mass * 1000) + " " + 
@@ -1658,14 +1644,13 @@ try {
 
     if (exitCode == 0) {
         String fullOutput = output.toString();
-        
-        // --- 关键修改开始：按行切割，寻找有效数据 ---
-        String[] lines = fullOutput.split("\\r?\\n"); // 兼容 Windows/Linux 换行符
-        boolean success = false; // 标记是否找到了数据
+
+        String[] lines = fullOutput.split("\\r?\\n"); 
+        boolean success = false; 
 
         for (String line : lines) {
             line = line.trim();
-            // 过滤掉空行，或者不包含逗号的行（因为我们的格式必须是 temp,time）
+
             if (line.isEmpty() || !line.contains(",")) {
                 continue; 
             }
@@ -1673,28 +1658,24 @@ try {
             try {
                 String[] values = line.split(",");
                 if (values.length >= 2) {
-                    // 尝试解析数字。如果这行是日志（例如 "[OK]..."），这里会报错并被 catch 捕获，跳过这行
                     double finalTemp = Double.parseDouble(values[0]);
                     double durationSec = Double.parseDouble(values[1]);
-                    
-                    // 成功解析！赋值并跳出循环
+
                     currentLadle.temperature = finalTemp;
                     currentLadle.cc_casting_time = durationSec;
                     
                     traceln("CC Data Found: Time=" + durationSec + "s, OutTemp=" + finalTemp);
                     success = true;
-                    break; // 找到数据了，后面的行就不看了
+                    break; 
                 }
             } catch (NumberFormatException e) {
-                // 这行虽然有逗号，但不是数字，说明是垃圾日志，忽略它，继续看下一行
                 continue;
             }
         }
-        // --- 关键修改结束 ---
 
         if (!success) {
             traceln("WARNING: CC Python finished but no valid data line found. Output was:\n" + fullOutput);
-            currentLadle.cc_casting_time = 3600; // 没找到数据的保底
+            currentLadle.cc_casting_time = 3600;
         }
 
     } else {
@@ -2457,4 +2438,5 @@ try {
 		<VersionBuild>5</VersionBuild>
     </RequiredLibraryReference>
 </Model>
+
 </AnyLogicWorkspace>
