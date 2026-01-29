@@ -70,7 +70,7 @@ steel-load-simulation/
 ├── matlab_fmu_library/    # [Layer 3] FMU Physical Model Library
 │   ├── eaf_model.fmu      # Electric Arc Furnace FMU
 │   ├── lf_model.fmu       # Ladle Furnace FMU
-│   └── rolling_mill.fmu   # Rolling Mill FMU
+│   └── cc_model.fmu       # Rolling Mill FMU
 ├── python/                # Python Scripts & Tools
 │   ├── run_eaf_fmu.py     # Script to run EAF FMU
 │   ├── run_lf_fmu.py      # Script to run LF FMU
