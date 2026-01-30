@@ -2,16 +2,11 @@
 <div align="center">
   <a href="https://www.hebut.edu.cn/" target="_blank"> <img width="50" height="50" alt="Hebei_University_of_Technology_Badge svg" src="https://github.com/user-attachments/assets/df4779fc-4408-45aa-a55c-8699ce0a9b66" style="vertical-align: middle;" />
   </a>
-  <span style="font-size: 22px; font-weight: bold; margin-left: 8px; vertical-align: middle;">HEBUT</span>
-  <br/>
-  <br/>
-
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![AnyLogic](https://img.shields.io/badge/Simulation-AnyLogic-green)](https://www.anylogic.com/)
 [![MATLAB](https://img.shields.io/badge/Model-MATLAB%2FSimulink%20FMU-orange)](https://www.mathworks.com/)
 [![License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
-</div>
 **Full-Process-Steel-Power-Load-Simulation-System** is a multi-layer hybrid simulation platform designed to simulate and analyze power load characteristics during the steel production process.
 
 This project innovatively adopts a three-layer architecture consisting of **LLM (Large Language Model) + AnyLogic (Discrete Event Simulation) + MATLAB FMU (Physical Mechanism Model)**. It achieves end-to-end generation from vague operational descriptions to precise power load waveforms.
