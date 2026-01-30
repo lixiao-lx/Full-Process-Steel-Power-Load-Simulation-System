@@ -3,9 +3,9 @@
 [![AnyLogic](https://img.shields.io/badge/Simulation-AnyLogic-green)](https://www.anylogic.com/)
 [![MATLAB](https://img.shields.io/badge/Model-MATLAB%2FSimulink%20FMU-orange)](https://www.mathworks.com/)
 [![License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
-<img width="960" height="960" alt="Hebei_University_of_Technology_Badge svg" src="https://github.com/user-attachments/assets/df4779fc-4408-45aa-a55c-8699ce0a9b66" />
+<img width="96" height="96" alt="Hebei_University_of_Technology_Badge svg" src="https://github.com/user-attachments/assets/df4779fc-4408-45aa-a55c-8699ce0a9b66" />
 
-**Steel Power Load Simulation System** is a multi-layer hybrid simulation platform designed to simulate and analyze power load characteristics during the steel production process.
+**Full-Process-Steel-Power-Load-Simulation-System** is a multi-layer hybrid simulation platform designed to simulate and analyze power load characteristics during the steel production process.
 
 This project innovatively adopts a three-layer architecture consisting of **LLM (Large Language Model) + AnyLogic (Discrete Event Simulation) + MATLAB FMU (Physical Mechanism Model)**. It achieves end-to-end generation from vague operational descriptions to precise power load waveforms.
 
