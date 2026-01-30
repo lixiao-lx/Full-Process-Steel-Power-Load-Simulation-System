@@ -3,8 +3,7 @@
 [![AnyLogic](https://img.shields.io/badge/Simulation-AnyLogic-green)](https://www.anylogic.com/)
 [![MATLAB](https://img.shields.io/badge/Model-MATLAB%2FSimulink%20FMU-orange)](https://www.mathworks.com/)
 [![License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
-
-<img width="96" height="96" alt="Hebei_University_of_Technology_Badge svg" src="https://github.com/user-attachments/assets/df4779fc-4408-45aa-a55c-8699ce0a9b66" />HEBUT
+<img width="50" height="50" alt="Hebei_University_of_Technology_Badge svg" src="https://github.com/user-attachments/assets/df4779fc-4408-45aa-a55c-8699ce0a9b66" />HEBUT
 
 **Full-Process-Steel-Power-Load-Simulation-System** is a multi-layer hybrid simulation platform designed to simulate and analyze power load characteristics during the steel production process.
 
