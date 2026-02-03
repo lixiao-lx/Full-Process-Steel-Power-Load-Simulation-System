@@ -122,15 +122,26 @@ python main.py --mode analyze --input ./results/simulation_output.csv
 
 ## 📊 Examples
 
-### 1. EAF Current Waveform under Complex Conditions
-Calculated by the FMU mechanism model, including high-order harmonics and non-linear flicker characteristics.
-*(Insert a static image here showing current/power changes in EAF during different stages: charging, melting, refining)*
+### 1. Packaged EAF mechanism model
+The packaged model is provided as an FMU file for AnyLogic.
 
-### 2. Steel Smelting Process Flow Chart
-*(Insert a static image here showing the full process flow from scrap charging to product output)*
+<img width="595" height="262" alt="341b680b70b817b0876a9c9b4b5b7b3c" src="https://github.com/user-attachments/assets/9abc3f95-05f2-425b-adff-2fbcbde4bbed" />
 
-### 3. Full-Process Power Superposition
-![alt text](modified_steel_plant_plot1.png)
+### 2. EAF Current Waveform under Complex Conditions
+Solveing by step based on the physical model.
+
+<img width="350" height="248" alt="fe88eae5921477867d3c63257eaecb09" src="https://github.com/user-attachments/assets/488c1d58-fa96-4168-b124-3c1cc8646069" />
+
+### 3. Steel Smelting Process Flow Chart
+Short-process steelmaking process.
+
+<img width="512" height="106" alt="91ce2f334d9a28d3ca56b455fafaa1f2" src="https://github.com/user-attachments/assets/9a7e4d13-5d20-45c4-9878-774eec2d9da8" />
+
+### 4. Full-Process Power Superposition
+Electricity consumption in steel smelting.
+
+<img width="450" height="180" alt="modified_steel_plant_plot1" src="https://github.com/user-attachments/assets/13ae062f-3ae3-482b-85ab-8d66340ef401" />
+
 
 ## 🗓️ Roadmap
 
